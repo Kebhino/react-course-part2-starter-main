@@ -23,11 +23,14 @@ const PostList = () => {
       <button
         disabled={page === 1}
         onClick={() => setPage(page - 1)}
-        className="btn btn-primary"
+        className="btn btn-primary my-3 ms-1"
       >
         Previous
       </button>
-      <button onClick={() => setPage(page + 1)} className="btn btn-primary">
+      <button
+        onClick={() => setPage(page + 1)}
+        className="btn btn-primary my-3 ms-1"
+      >
         Previous
       </button>
     </>

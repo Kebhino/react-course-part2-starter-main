@@ -27,6 +27,7 @@ const usePostList = (query: PostQuery) => useQuery<Post[], Error>({
             })
             .then((res) => res.data),  
     staleTime: 10 * 1000,
+    keepPreviousData: true
     
     
    
