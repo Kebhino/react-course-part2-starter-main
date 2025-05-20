@@ -19,6 +19,8 @@ const useTodos =() => {
       
       return useQuery<Todo[], Error>({
     queryKey: ["todos"],
-    queryFn: fetchTodos,});}
+    queryFn: fetchTodos,
+staleTime: 10*1000
+});}
 
 export default useTodos;    
