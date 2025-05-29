@@ -8,7 +8,7 @@ const TodoForm = () => {
   const addTodo = useMutation<Todo, Error, Todo>({
     mutationFn: (todo: Todo) =>
       axios
-        .post<Todo>("https://jsonplaceholder.typicode.com/txodos", todo)
+        .post<Todo>("https://jsonplaceholder.typicode.com/todos", todo)
         .then((res) => res.data),
     onSuccess: (savedTodo, newTodo) => {
       // 1 SPOSÓB:
@@ -24,6 +24,7 @@ const TodoForm = () => {
         savedTodo,
         ...(todos || []),
       ]);
+      if (ref.current) ref.current.value = "";
     },
   });
 
@@ -52,8 +53,12 @@ const TodoForm = () => {
           <input ref={ref} type="text" className="form-control" />
         </div>
         <div className="col">
-          <button className="btn btn-primary" type="submit">
-            Add
+          <button
+            className="btn btn-primary"
+            type="submit"
+            disabled={addTodo.isLoading}
+          >
+            {addTodo.isLoading ? "Loading..." : "Add"}
           </button>
         </div>
       </form>
