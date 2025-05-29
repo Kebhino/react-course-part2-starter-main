@@ -10,6 +10,14 @@ const TodoForm = () => {
       axios
         .post<Todo>("https://jsonplaceholder.typicode.com/todos", todo)
         .then((res) => res.data),
+
+    onMutate: (newTodo: Todo) => {
+      queryClient.setQueryData<Todo[]>(["todos"], (todos) => [
+        newTodo,
+        ...(todos || []),
+      ]);
+      if (ref.current) ref.current.value = "";
+    },
     onSuccess: (savedTodo, newTodo) => {
       // 1 SPOSÓB:
       // I teraz trzeba powiedzieć do ReactQuery że jest coś nowego i dane ma stare, żeby pobrał sobie nowe.
@@ -18,13 +26,7 @@ const TodoForm = () => {
       //     });
       //   },
       // });
-
       // 2 SPOSÓB Aktulizujemy dane w cache bezpośrednio
-      queryClient.setQueryData<Todo[]>(["todos"], (todos) => [
-        savedTodo,
-        ...(todos || []),
-      ]);
-      if (ref.current) ref.current.value = "";
     },
   });
 
