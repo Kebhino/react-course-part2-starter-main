@@ -1,21 +1,21 @@
-import { useState } from 'react';
-
-interface Task {
-  id: number;
-  title: string;
-}
+import { useReducer, useState } from "react";
+import taskReducer from "./reducers/taskReducer";
 
 const TaskList = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, dispatch] = useReducer(taskReducer, []);
+  console.log(tasks);
 
   return (
     <>
       <button
         onClick={() =>
-          setTasks([
-            { id: Date.now(), title: 'Task ' + Date.now() },
-            ...tasks,
-          ])
+          dispatch({
+            type: "add",
+            task: {
+              id: Date.now(),
+              title: `Zadanie ${Math.floor(Math.random() * 500)}`,
+            },
+          })
         }
         className="btn btn-primary my-3"
       >
@@ -30,9 +30,7 @@ const TaskList = () => {
             <span className="flex-grow-1">{task.title}</span>
             <button
               className="btn btn-outline-danger"
-              onClick={() =>
-                setTasks(tasks.filter((t) => t.id !== task.id))
-              }
+              onClick={() => dispatch({ type: "delete", taskId: task.id })}
             >
               Delete
             </button>
