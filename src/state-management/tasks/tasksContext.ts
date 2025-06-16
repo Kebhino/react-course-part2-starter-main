@@ -1,6 +1,5 @@
-import { AuthAction } from "../reducers/authReducer";
-import { Task, TaskAction } from "../reducers/taskReducer";
 import React, { Dispatch } from "react";
+import { Task, TaskAction } from "./TaskProvider";
 
 interface TaskContextBox { 
 
