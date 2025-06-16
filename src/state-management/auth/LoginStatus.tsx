@@ -1,14 +1,14 @@
-import useAuth from "./useAuth";
+import useAuthStore from "./store";
 
 const LoginStatus = () => {
-  const { user, dispatch } = useAuth();
+  const body = useAuthStore(); //on zrobił w kursie restrukturyzacje oczywisce ale napisałem sobie TaskContext.
 
-  if (user)
+  if (body.user)
     return (
       <>
         <div>
-          <span className="mx-2">{user}</span>
-          <a onClick={() => dispatch({ type: "logout" })} href="#">
+          <span className="mx-2">{body.user}</span>
+          <a onClick={() => body.logout()} href="#">
             Logout
           </a>
         </div>
@@ -16,10 +16,7 @@ const LoginStatus = () => {
     );
   return (
     <div>
-      <a
-        onClick={() => dispatch({ type: "login", username: "Jakub Wrobel" })}
-        href="#"
-      >
+      <a onClick={() => body.login("Jakub Wróbel")} href="#">
         Login
       </a>
     </div>
