@@ -11,7 +11,7 @@ const TaskList = () => {
 
   return (
     <>
-      <p>{user}</p>
+      <p>User: {user}</p>
       <button
         onClick={() =>
           dispatch({
